@@ -3,9 +3,9 @@ import '../../css/Footer.css';
 
 function Footer() {
   return (
-    <div className="footer">
-      <div className="copyright">
-        <p>Copyright ©2022 Nisum Technologies, Inc.</p>
+    <div className="footer-container">
+      <div>
+        <p className="copyright-text">Copyright ©2022 Nisum Technologies, Inc.</p>
       </div>
       <div className="social-media-icons">
         <a href="https://www.facebook.com/NisumTech/">
