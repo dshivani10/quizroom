@@ -1,0 +1,23 @@
+.home-page{
+    display: flex;
+    justify-content: center;
+}
+.quiz-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px 20px;
+    cursor: pointer;
+}
+.quiz-box{
+    height: 150px;
+    width: 150px;
+    background: url("https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg") no-repeat;
+    border-radius: 10px;
+}
+.quiz-title{
+    font-size: 20px;
+}
+.quiz-title:hover{
+    font-weight: 700;
+}

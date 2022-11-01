@@ -1,0 +1,103 @@
+.main-container{
+    display: flex;
+}
+.question-type{
+    width: 50%;
+    padding: 50px 150px;
+}
+.question-details{
+    width: 50%;
+    padding: 50px 150px;
+}
+.question-type-item{
+    display: flex;
+    margin: 12px;
+    align-items: center;
+}
+.question-type-icon{
+    cursor: pointer;
+    height: 20px;
+    margin-right: 10px;
+}
+.question-type-text{
+    cursor: pointer;
+    text-align: left;
+    margin: 0;
+    font-size: 17px;
+}
+.selected-type{
+    font-weight: 700;
+}
+.question-title-box,.question-answer-box{
+    display: flex;
+    margin-bottom: 15px;
+}
+.question-title-label{
+    font-size: 17px;
+    font-weight: 700;
+}
+.question-input{
+    margin-left: 10px;
+    height: 25px;
+    width: 200px;
+    background-color: rgb(9, 181, 244, 0.3);
+    border: 1px solid grey;
+    box-shadow: none;
+    border-radius: 5px;
+}
+.option-input-text{
+    height: 20px;
+    width: 200px;
+    background-color: rgb(9, 181, 244, 0.3);
+    border: 1px solid grey;
+    box-shadow: none;
+    border-radius: 5px;
+}
+.question-options-box{
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+.input-icon-check{
+    content: url('../icons/unchecked.png');
+    height: 16px;
+    width: 16px;
+    margin: 0px 10px 0px 0px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.input-icon-check:checked{
+    content: url('../icons/checkbox.png');
+}
+.input-icon-radio{
+    content: url('../icons/oval.png');
+    height: 16px;
+    width: 16px;
+    margin: 0px 10px 0px 0px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.input-icon-radio:checked{
+    content: url('../icons/button.png');
+}
+.optionitem{
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}
+.submit-button-container{
+    display: flex;
+    justify-content: baseline;
+    margin: 15px 0px 0px 5px;
+}
+.submit-button{
+    background-color: rgb(9, 181, 244, 0.7);
+    border: 0;
+    height: 40px;
+    width: 100px;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 700;
+}

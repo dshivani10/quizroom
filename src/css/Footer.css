@@ -1,0 +1,22 @@
+.footer{
+    background-color: #3271F6;
+    bottom: 0;
+    font-family: 'corbel-regular', Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.copyright{
+    color: white;
+    font-size: 14px;
+    padding: 10px 200px;
+}
+.social-media-icons{
+    display: flex;
+    justify-content: end;
+    padding: 10px 200px;
+}
+.social-icon{
+    height: 30px;
+    margin-left: 20px;
+}
