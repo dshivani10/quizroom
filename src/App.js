@@ -1,11 +1,11 @@
 import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import QuizComponent from './containers/QuizComponent';
-import AddQuestion from './containers/AddQuestion';
-import Header from './containers/Header';
-import Footer from './containers/Footer';
-import Home from './containers/Home';
+import QuizPage from './containers/views/QuizPage';
+import AddQuestionPage from './containers/views/AddQuestionPage';
+import Header from './containers/components/Header';
+import Footer from './containers/components/Footer';
+import HomePage from './containers/views/HomePage';
 
 function App() {
   return (
@@ -15,9 +15,9 @@ function App() {
         <div className="app-spacing" />
         <div className="app-content">
           <Routes>
-            <Route path="/quiz/:quizId" exact element={<QuizComponent />} />
-            <Route path="/quiz/:quizId/add-question" exact element={<AddQuestion />} />
-            <Route path="/" exact element={<Home />} />
+            <Route path="/quiz/:quizId" exact element={<QuizPage />} />
+            <Route path="/quiz/:quizId/add-question" exact element={<AddQuestionPage />} />
+            <Route path="/" exact element={<HomePage />} />
             <Route>404 Not found!</Route>
           </Routes>
         </div>

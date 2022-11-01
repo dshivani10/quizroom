@@ -2,7 +2,7 @@
     padding: 20px 20px;
     background-color: #F6F6F6;
     top: 0;
-    width: calc(100% - 40px);
+    width: 100%;
     position: fixed;
     display: flex;
     justify-content: space-between;

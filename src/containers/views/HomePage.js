@@ -4,10 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {
   addAllQuizzes,
-} from '../redux/actions/quizActions';
-import '../css/Home.css';
+} from '../../redux/actions/quizActions';
+import '../../css/Home.css';
+import Loader from '../components/Loader';
 
-function Home() {
+function HomePage() {
   const allQuizzesData = useSelector((state) => state.quiz.allQuizzesData);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,9 +28,13 @@ function Home() {
           <div className="quiz-box" />
           <p className="quiz-title">{quizItem.name}</p>
         </div>
-      )) : ''}
+      )) : (
+      <div className="loading">
+        <Loader />
+      </div>
+    )}
     </div>
   );
 }
 
-export default Home;
+export default HomePage;

@@ -2,12 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import '../css/AddQuestion.css';
+import '../../css/AddQuestion.css';
 import {
   changeType,
-} from '../redux/actions/quizActions';
+} from '../../redux/actions/quizActions';
 
-function AddQuestion() {
+function AddQuestionPage() {
   const questionType = useSelector((state) => state.addQuestion.questionType);
   const { quizId } = useParams();
   const dispatch = useDispatch();
@@ -222,4 +222,4 @@ function AddQuestion() {
   );
 }
 
-export default AddQuestion;
+export default AddQuestionPage;
