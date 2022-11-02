@@ -20,9 +20,13 @@ function QuestionsListItem() {
     const onChangeBlank = (e) => {
         dispatch(updateBlank({index:currentQuestionIndex,value:e.target.value}));
     }
+    const checkExists = (e) => {
+        return (currentQuestion.checkedOptionIds.includes(e))
+    }
     return (
         <div className="questions-list-item">
             <p className="question-title">{currentQuestion.title}</p>
+            <p>{currentQuestion.checkedOptionId}</p>
             {
                 (currentQuestion.type === 'radio' || currentQuestion.type === 'bool') ? (
                 <Radio.Group onChange={onChangeRadioBool} value={currentQuestion.checkedOptionId}>
@@ -35,7 +39,10 @@ function QuestionsListItem() {
                     </Space>
                 </Radio.Group>) 
                 : (currentQuestion.type === 'check' ? (
-                <Checkbox.Group options={currentQuestion.options} onChange={onChangeCheck} />) : (
+                    currentQuestion.options.map((optionItem) => (
+                        <Checkbox key={optionItem.value} checked={checkExists(optionItem.value)} onChange={() => onChangeCheck(optionItem.value)}>{optionItem.label}</Checkbox>
+                    ))
+                ) : (
                     <Input defaultValue={currentQuestion.typedAnswer} placeholder="Enter your answer here ..." onChange={onChangeBlank} />
                 ))
             }
