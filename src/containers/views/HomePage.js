@@ -14,7 +14,7 @@ function HomePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   async function fetchData() {
-    const response = await axios.get('http://localhost:5000/api/all-quizzes');
+    const response = await axios.get('https://nisum-quizroom.herokuapp.com/api/all-quizzes');
     const quiz = response.data;
     dispatch(addAllQuizzes(quiz));
   }

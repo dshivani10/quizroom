@@ -18,7 +18,7 @@ function QuestionsList() {
   const currentQuiz = useSelector((state) => state.quiz.currentQuiz);
   const numberOfQuestions = useSelector((state) => state.quiz.numberOfQuestions);
   async function fetchData(qid) {
-    const response = await axios.get(`http://nisum-quizroom.herokuapp.com/api/quizzes/${qid}`);
+    const response = await axios.get(`https://nisum-quizroom.herokuapp.com/api/quizzes/${qid}`);
     const quiz = response.data;
     dispatch(setCurrentQuiz(quiz));
   }
