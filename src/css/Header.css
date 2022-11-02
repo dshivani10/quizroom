@@ -2,7 +2,7 @@
     padding: 20px 20px;
     background-color: #F6F6F6;
     top: 0;
-    width: calc(100% - 40px);
+    width: 100%;
     position: fixed;
     display: flex;
     justify-content: space-between;
@@ -13,6 +13,7 @@
 .icons-block{
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 .account-container{
     display: flex;
@@ -22,4 +23,5 @@
     display: flex;
     align-items: center;
     height: 50px;
+    cursor: pointer;
 }

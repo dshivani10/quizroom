@@ -1,10 +1,12 @@
 import React from 'react';
-import '../css/Header.css';
+import { useNavigate } from 'react-router-dom';
+import '../../css/Header.css';
 
 function Header() {
+  const navigate = useNavigate();
   return (
     <div className="header">
-      <div className="icons-block">
+      <div className="icons-block" onClick={() => navigate('/')} >
         <img className="nisum-image" src="../../nisum.jpeg" alt="nisum-logo" />
       </div>
       <div className="account-container">

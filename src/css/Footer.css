@@ -1,4 +1,4 @@
-.footer{
+.footer-container{
     background-color: #3271F6;
     bottom: 0;
     font-family: 'corbel-regular', Arial, sans-serif;
@@ -6,10 +6,11 @@
     align-items: center;
     justify-content: space-between;
 }
-.copyright{
+.copyright-text{
     color: white;
     font-size: 14px;
     padding: 10px 200px;
+    margin: 0;
 }
 .social-media-icons{
     display: flex;

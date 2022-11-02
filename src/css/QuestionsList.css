@@ -1,0 +1,26 @@
+.loading{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.questions-list{
+    width: 70%;
+    margin: auto;
+    text-align: left;
+}
+.questions-list-item{
+    margin: 30px 0px;
+}
+.quiz-page-title{
+    font-size: 25px;
+    font-weight: 700;
+    margin: 30px 0px 20px 0px;
+}
+.questions-pagination{
+    display: flex;
+}
+.question-title{
+    font-size: 17px;
+    font-weight: 600;
+}
