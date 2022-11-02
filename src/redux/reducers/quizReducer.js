@@ -83,6 +83,20 @@ export const quizReducer = (state = quizInitialState, { type, payload }) => {
         currentQuestion: {...list[index]}
       }
     }
+    case ActionTypes.RESET_STATE:{
+      return {
+        ...state,
+        currentQuiz: {
+          topic:'',
+          subtopic:'',
+          _id:''
+        },
+        currentQuizQuestions: [],
+        numberOfQuestions:0,
+        currentQuestion:{},
+        currentQuestionIndex:0,
+      }
+    }
     default:
       return state;
   }

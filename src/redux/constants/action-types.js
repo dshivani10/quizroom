@@ -6,5 +6,6 @@ const ActionTypes = {
   UPDATE_RADIO_BOOL: 'UPDATE_RADIO_BOOL',
   UPDATE_CHECK: 'UPDATE_CHECK',
   UPDATE_BLANK: 'UPDATE_BLANK',
+  RESET_STATE: 'RESET_STATE',
 };
 export default ActionTypes;

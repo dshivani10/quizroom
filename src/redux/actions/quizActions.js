@@ -34,3 +34,8 @@ export const updateBlank = (value) => ({
   type: ActionTypes.UPDATE_BLANK,
   payload: value,
 });
+
+export const resetState = (value) => ({
+  type: ActionTypes.RESET_STATE,
+  payload: value,
+})

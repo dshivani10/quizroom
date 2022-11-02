@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
@@ -6,7 +6,8 @@ import { Pagination } from 'antd';
 import 'antd/dist/antd.css';
 import {
   setCurrentQuiz,
-  setCurrentQuestionIndex
+  setCurrentQuestionIndex,
+  resetState
 } from '../../redux/actions/quizActions';
 import '../../css/QuestionsList.css';
 import Loader from './Loader';
@@ -15,6 +16,7 @@ import QuestionsListItem from './QuestionsListItem';
 function QuestionsList() {
   const { quizId } = useParams();
   const dispatch = useDispatch();
+  const dataFetchedRef = useRef(false);
   const currentQuiz = useSelector((state) => state.quiz.currentQuiz);
   const numberOfQuestions = useSelector((state) => state.quiz.numberOfQuestions);
   async function fetchData(qid) {
@@ -26,6 +28,12 @@ function QuestionsList() {
     dispatch(setCurrentQuestionIndex(page-1));
   };
   useEffect(() => {
+    if (dataFetchedRef.current){
+      return () => {
+        dispatch(resetState('reset'));
+      }
+    };
+    dataFetchedRef.current = true;
     fetchData(quizId);
   }, []);
 

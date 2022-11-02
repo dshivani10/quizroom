@@ -26,7 +26,6 @@ function QuestionsListItem() {
     return (
         <div className="questions-list-item">
             <p className="question-title">{currentQuestion.title}</p>
-            <p>{currentQuestion.checkedOptionId}</p>
             {
                 (currentQuestion.type === 'radio' || currentQuestion.type === 'bool') ? (
                 <Radio.Group onChange={onChangeRadioBool} value={currentQuestion.checkedOptionId}>
@@ -39,9 +38,13 @@ function QuestionsListItem() {
                     </Space>
                 </Radio.Group>) 
                 : (currentQuestion.type === 'check' ? (
-                    currentQuestion.options.map((optionItem) => (
-                        <Checkbox key={optionItem.value} checked={checkExists(optionItem.value)} onChange={() => onChangeCheck(optionItem.value)}>{optionItem.label}</Checkbox>
-                    ))
+                    <div className='check-group-container'>
+                    {
+                        currentQuestion.options.map((optionItem) => (
+                            <Checkbox key={optionItem.value} checked={checkExists(optionItem.value)} onChange={() => onChangeCheck(optionItem.value)}>{optionItem.label}</Checkbox>
+                        ))
+                    }
+                    </div>
                 ) : (
                     <Input defaultValue={currentQuestion.typedAnswer} placeholder="Enter your answer here ..." onChange={onChangeBlank} />
                 ))
