@@ -3,11 +3,14 @@ import ActionTypes from '../constants/action-types';
 const quizInitialState = {
   allQuizzesData: [],
   currentQuiz: {
-    name:'',
+    topic:'',
+    subtopic:'',
     _id:''
   },
   currentQuizQuestions: [],
   numberOfQuestions:0,
+  currentQuestion:{},
+  currentQuestionIndex:0,
 };
 const questionInitialState = {};
 export const quizReducer = (state = quizInitialState, { type, payload }) => {
@@ -18,13 +21,61 @@ export const quizReducer = (state = quizInitialState, { type, payload }) => {
         allQuizzesData: payload,
       };
     case ActionTypes.SET_CURRENT_QUIZ:{
-      let {name, _id, questions} = payload;
+      let {topic, subtopic, _id, questions} = payload;
+      questions.map((e) => {
+        if(e.type === 'radio' || e.type === 'bool'){
+          return {...e, checkedOptionId: 0}
+        } else if(e.type === 'check'){
+          return {...e, checkedOptionIds: []}
+        } else {
+          return {...e, typedAnswer:''}
+        }
+      })
       return {
         ...state,
-        currentQuiz: {name,_id},
+        currentQuiz: {topic, subtopic, _id},
         currentQuizQuestions: questions,
-        numberOfQuestions: questions.length
+        numberOfQuestions: questions.length,
+        currentQuestion: questions[0],
       };
+    }
+    case ActionTypes.SET_CURRENT_QUESTION_INDEX:{
+      const {currentQuizQuestions} = state;
+      return {
+        ...state,
+        currentQuestionIndex:payload,
+        currentQuestion: currentQuizQuestions[payload],
+      }
+    }
+    case ActionTypes.UPDATE_RADIO_BOOL:{
+      let {index, value} = payload;
+      let list = state.currentQuizQuestions;
+      list[index].checkedOptionId = value;
+      return {
+        ...state,
+        currentQuizQuestions: list,
+        currentQuestion: list[index]
+      }
+    }
+    case ActionTypes.UPDATE_CHECK:{
+      let {index, value} = payload;
+      let list = state.currentQuizQuestions;
+      list[index].checkedOptionIds = [...value];
+      return {
+        ...state,
+        currentQuizQuestions: list,
+        currentQuestion: list[index]
+      }
+    }
+    case ActionTypes.UPDATE_BLANK:{
+      let {index, value} = payload;
+      let list = state.currentQuizQuestions;
+      list[index].typedAnswer = value;
+      return {
+        ...state,
+        currentQuizQuestions: list,
+        currentQuestion: list[index]
+      }
     }
     default:
       return state;

@@ -11,29 +11,56 @@ function AddQuestionPage() {
   const questionType = useSelector((state) => state.addQuestion.questionType);
   const { quizId } = useParams();
   const dispatch = useDispatch();
-  const questionRadioCheck = {
-    type: '',
+  const questionRadio = {
+    type: 'radio',
+    title: '',
+    correctOptionId: 0,
+    options: [
+      {
+        value: 1,
+        label: '',
+        status: 'unset',
+      },
+      {
+        value: 2,
+        label: '',
+        status: 'unset',
+      },
+      {
+        value: 3,
+        label: '',
+        status: 'unset',
+      },
+      {
+        value: 4,
+        label: '',
+        status: 'unset',
+      },
+    ],
+  };
+  const questionCheck = {
+    type: 'check',
     title: '',
     correctOptionIds: [],
     options: [
       {
-        id: 1,
-        option: '',
+        value: 1,
+        label: '',
         status: 'unset',
       },
       {
-        id: 2,
-        option: '',
+        value: 2,
+        label: '',
         status: 'unset',
       },
       {
-        id: 3,
-        option: '',
+        value: 3,
+        label: '',
         status: 'unset',
       },
       {
-        id: 4,
-        option: '',
+        value: 4,
+        label: '',
         status: 'unset',
       },
     ],
@@ -41,16 +68,16 @@ function AddQuestionPage() {
   const questionBool = {
     title: '',
     type: 'bool',
-    correctAnswer: '',
+    correctOptionId: 0,
     options: [
       {
-        id: 1,
-        option: 'True',
+        value: 1,
+        label: 'True',
         status: 'unset',
       },
       {
-        id: 2,
-        option: 'False',
+        value: 2,
+        label: 'False',
         status: 'unset',
       },
     ],
@@ -64,8 +91,10 @@ function AddQuestionPage() {
     dispatch(changeType(val));
   }
   function questionTitle(event, type) {
-    if (type === 'radio' || type === 'check') {
-      questionRadioCheck.title = event.target.value;
+    if (type === 'radio') {
+      questionRadio.title = event.target.value;
+    } else if (type === 'check') {
+      questionCheck.title = event.target.value;
     } else if (type === 'bool') {
       questionBool.title = event.target.value;
     } else if (type === 'blank') {
@@ -73,26 +102,26 @@ function AddQuestionPage() {
     }
   }
   function optionText(val, id, type) {
-    if (type === 'radio' || type === 'check') {
-      questionRadioCheck.options[(id - 1)].option = val;
+    if (type === 'radio') {
+      questionRadio.options[(id - 1)].option = val;
+    } else if (type === 'check'){
+      questionCheck.options[(id - 1)].option = val;
     }
   }
   function optionSelected(event, type) {
-    if (type === 'radio' || type === 'check') {
-      questionRadioCheck.correctOptionIds.push(event.target.value);
-    } else if (type === 'bool') {
-      questionBool.correctAnswer = event.target.value;
+    if (type === 'radio' || type === 'bool') {
+      questionRadio.correctOptionId = event.target.value;
+    } else if (type === 'check') {
+      questionCheck.correctOptionIds.push(event.target.value);
     } else if (type === 'blank') {
       questionBlank.correctAnswer = event.target.value;
     }
   }
   async function submitQuestion(type) {
     if (type === 'radio') {
-      questionRadioCheck.type = 'radio';
-      await axios.post(`https://nisum-quizroom.herokuapp.com/api/quizzes/${quizId}/question`, questionRadioCheck);
+      await axios.post(`https://nisum-quizroom.herokuapp.com/api/quizzes/${quizId}/question`, questionRadio);
     } else if (type === 'check') {
-      questionRadioCheck.type = 'check';
-      await axios.post(`https://nisum-quizroom.herokuapp.com/api/quizzes/${quizId}/question`, questionRadioCheck);
+      await axios.post(`https://nisum-quizroom.herokuapp.com/api/quizzes/${quizId}/question`, questionCheck);
     } else if (type === 'bool') {
       await axios.post(`https://nisum-quizroom.herokuapp.com/api/quizzes/${quizId}/question`, questionBool);
     } else if (type === 'blank') {
@@ -131,11 +160,11 @@ function AddQuestionPage() {
             </div>
             <div className="question-options-box">
               {
-                questionRadioCheck.options.map((option) => (
-                  <label key={option.id} htmlFor={`option-${option.id}`}>
-                    <div className="optionitem" id={`option-${option.id}`}>
-                      <input className="input-icon-radio" value={option.id} onChange={(e) => optionSelected(e, 'radio')} type="radio" />
-                      <input className="option-input-text" onChange={(e) => optionText(e.target.value, option.id, 'radio')} placeholder={`Option ${option.id}`} type="text" />
+                questionRadio.options.map((option) => (
+                  <label key={option.value} htmlFor={`option-${option.value}`}>
+                    <div className="optionitem" id={`option-${option.value}`}>
+                      <input className="input-icon-radio" value={option.value} onChange={(e) => optionSelected(e, 'radio')} type="radio" />
+                      <input className="option-input-text" onChange={(e) => optionText(e.target.value, option.value, 'radio')} placeholder={`Option ${option.value}`} type="text" />
                     </div>
                   </label>
                 ))
@@ -157,11 +186,11 @@ function AddQuestionPage() {
             </div>
             <div className="question-options-box">
               {
-                questionRadioCheck.options.map((option) => (
-                  <label key={option.id} htmlFor={`option-${option.id}`}>
-                    <div className="optionitem" id={`option-${option.id}`}>
-                      <input className="input-icon-check" value={option.id} onChange={(e) => optionSelected(e, 'check')} type="checkbox" />
-                      <input className="option-input-text" onChange={(e) => optionText(e.target.value, option.id, 'check')} placeholder={`Option ${option.id}`} type="text" />
+                questionCheck.options.map((option) => (
+                  <label key={option.value} htmlFor={`option-${option.value}`}>
+                    <div className="optionitem" id={`option-${option.value}`}>
+                      <input className="input-icon-check" value={option.value} onChange={(e) => optionSelected(e, 'check')} type="checkbox" />
+                      <input className="option-input-text" onChange={(e) => optionText(e.target.value, option.value, 'check')} placeholder={`Option ${option.value}`} type="text" />
                     </div>
                   </label>
                 ))
@@ -184,10 +213,10 @@ function AddQuestionPage() {
             <div className="question-options-box">
               {
                 questionBool.options.map((option) => (
-                  <label key={option.id} htmlFor={`option-${option.id}`}>
-                    <div className="optionitem" id={`option-${option.id}`}>
-                      <input className="input-icon-radio" value={option.option} onChange={(e) => optionSelected(e, 'bool')} type="radio" />
-                      <span>{option.option}</span>
+                  <label key={option.value} htmlFor={`option-${option.value}`}>
+                    <div className="optionitem" id={`option-${option.value}`}>
+                      <input className="input-icon-radio" value={option.value} onChange={(e) => optionSelected(e, 'bool')} type="radio" />
+                      <span>{option.label}</span>
                     </div>
                   </label>
                 ))

@@ -14,3 +14,23 @@ export const setCurrentQuiz = (value) => ({
   type: ActionTypes.SET_CURRENT_QUIZ,
   payload: value,
 });
+
+export const setCurrentQuestionIndex = (value) => ({
+  type: ActionTypes.SET_CURRENT_QUESTION_INDEX,
+  payload: value,
+});
+
+export const updateRadioBool = (value) => ({
+  type: ActionTypes.UPDATE_RADIO_BOOL,
+  payload: value,
+});
+
+export const updateCheck = (value) => ({
+  type: ActionTypes.UPDATE_CHECK,
+  payload: value,
+});
+
+export const updateBlank = (value) => ({
+  type: ActionTypes.UPDATE_BLANK,
+  payload: value,
+});
