@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -13,12 +13,15 @@ function HomePage() {
   const [ selectedTopic,  setSelectedTopic] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dataFetchedRef = useRef(false);
   async function fetchData() {
     const response = await axios.get('https://nisum-quizroom.herokuapp.com/api/all-quizzes');
     const quiz = response.data;
     dispatch(addAllQuizzes(quiz));
   }
   useEffect(() => {
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
     fetchData();
   }, []);
 
