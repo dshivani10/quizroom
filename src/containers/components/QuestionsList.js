@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import { Pagination, Statistic, message, Button, Modal } from 'antd';
+import { Pagination, Button, Modal, Result } from 'antd';
 import 'antd/dist/antd.css';
 import {
   setCurrentQuiz,
@@ -18,14 +18,13 @@ function QuestionsList() {
   const { quizId } = useParams();
   const dispatch = useDispatch();
   const dataFetchedRef = useRef(false);
-  const [showWarning, setShowWarning] = useState(false);
   const [showScore, setShowScore] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const { Countdown } = Statistic;
-  const deadline = Date.now() + (1000 * 21) ;
-  const warnDeadline = Date.now() + (1000 * 11);
+  const [showResult, setShowResult] = useState(false);
+  const [score, setScore] = useState(0);
   const currentQuiz = useSelector((state) => state.quiz.currentQuiz);
   const numberOfQuestions = useSelector((state) => state.quiz.numberOfQuestions);
+  const currentQuizQuestions = useSelector((state) => state.quiz.currentQuizQuestions);
   async function fetchData(qid) {
     const response = await axios.get(`https://nisum-quizroom.herokuapp.com/api/quizzes/${qid}`);
     const quiz = response.data;
@@ -34,29 +33,23 @@ function QuestionsList() {
   const onChangePage = (page) => {
     dispatch(setCurrentQuestionIndex(page-1));
   };
-  const onFinish = () => {
-    // setShowScore(true);
-  };
   const clickSubmit = () => {
     setShowModal(true);
   }
   const submitModal = () => {
     setShowModal(false);
-    setShowScore(true);
-  }
-  const warning = () => {
-    setShowWarning(true);
-    message.warning({
-      content: '10 seconds left !! Test will auto submit when time is up.',
-      style: {
-        marginTop: '90px',
-      },
+    let sum = 0;
+    currentQuizQuestions.forEach(element => {
+      if((element.type === 'radio' || element.type === 'bool') && element.checkedOptionId === element.correctOptionId){
+        sum=sum+1;
+      }else if(element.type === 'blank' && element.correctAnswer === element.typedAnswer){
+        sum=sum+1;
+      }else if(element.type === 'check' && JSON.stringify(element.checkedOptionIds.sort()) === JSON.stringify(element.correctOptionIds.sort())){
+        sum=sum+1;
+      }
     });
-  };
-  const countDownChange = (val) => {
-    if(val < 11*1000 && !showWarning){
-      warning();
-    }
+    setScore(sum);
+    setShowResult(true);
   }
   useEffect(() => {
     if (dataFetchedRef.current){
@@ -70,43 +63,56 @@ function QuestionsList() {
 
   return (
     numberOfQuestions > 0 ? (
-      !showScore ? (
-      <div className="questions-list">
-        <div className="quiz-page-title">
-          <p>{currentQuiz.subtopic}</p>
-          { showWarning ? <Countdown valueStyle={{color: 'red'}} value={warnDeadline} onFinish={onFinish} />
-          : <Countdown onChange={countDownChange} value={deadline} />
-          }
-        </div>
-        <div className="questions-pagination">
-          <Pagination 
-            onChange={onChangePage} 
-            defaultCurrent={1} 
-            defaultPageSize={1} 
-            total={numberOfQuestions} />
-          <Button type="primary" size="large" onClick={clickSubmit}>Submit</Button>
-          <Modal
-            centered
-            closable={false}
-            open={showModal}
-            onOk={submitModal}
-            onCancel={() => setShowModal(false)}
-          >
-            <p>You are about to end the Quiz</p>
-          </Modal>
-        </div>
-        <QuestionsListItem />
-      </div>
-    ) : <div className="questions-list">
+      !showResult ? (
+        <div className="questions-list">
           <div className="quiz-page-title">
             <p>{currentQuiz.subtopic}</p>
-            <p>Score: 2/4</p>
           </div>
-        <ScoreComponent />
-        </div>) : (
-        <div className="loading">
-          <Loader />
+          <div className="questions-pagination">
+            <Pagination 
+              onChange={onChangePage} 
+              defaultCurrent={1} 
+              defaultPageSize={1} 
+              total={numberOfQuestions} />
+            <Button type="primary" size="large" onClick={clickSubmit}>Submit</Button>
+            <Modal
+              centered
+              closable={false}
+              open={showModal}
+              onOk={submitModal}
+              onCancel={() => setShowModal(false)}
+            >
+              <p>You are about to end the Quiz</p>
+            </Modal>
+          </div>
+          <QuestionsListItem />
         </div>
+      ) : (
+        (showResult && !showScore) ? 
+        <div>
+          <Result
+            status="success"
+            title="Completed the Quiz !"
+            subTitle={`You have successfully completed the ${currentQuiz.subtopic} quiz. You have scored ${score}/${numberOfQuestions}`}
+            extra={[
+              <Button onClick={() => setShowScore(true)} type="primary" key="console">
+                Review Answers
+              </Button>,
+              <Button key="home">Go to Home</Button>,
+            ]}
+          />
+        </div> :
+        <div className="questions-list">
+          <div className="quiz-page-title">
+            <p>{currentQuiz.subtopic}</p>
+            <p>Score: {score}/{numberOfQuestions}</p>
+          </div>
+          <ScoreComponent />
+        </div>
+      )) : (
+      <div className="loading">
+        <Loader />
+      </div>
     )
   );
 }

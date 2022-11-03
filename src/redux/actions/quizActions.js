@@ -39,3 +39,8 @@ export const resetState = (value) => ({
   type: ActionTypes.RESET_STATE,
   payload: value,
 })
+
+export const calculateScore = (value) => ({
+  type: ActionTypes.CALCULATE_SCORE,
+  payload: value,
+})
