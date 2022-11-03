@@ -15,10 +15,14 @@
 .quiz-page-title{
     font-size: 25px;
     font-weight: 700;
-    margin: 30px 0px 20px 0px;
+    margin: 30px 0px 0px 0px;
+    display: flex;
+    justify-content: space-between;
 }
 .questions-pagination{
     display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .question-title{
     font-size: 17px;
@@ -27,4 +31,10 @@
 .check-group-container{
     display: flex;
     flex-direction: column;
+}
+.ant-checkbox-wrapper {
+    margin: 0px 0px 10px 0px !important;
+}
+.ant-radio-disabled + span, .ant-checkbox-disabled + span, .ant-input[disabled] {
+    color: black !important;
 }
