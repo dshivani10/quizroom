@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { Pagination, Button, Modal, Result } from 'antd';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import {
   setCurrentQuiz,
   setCurrentQuestionIndex,

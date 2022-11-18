@@ -1,6 +1,6 @@
 import { Radio, Space, Checkbox, Input, Tabs } from 'antd';
 import { useSelector } from 'react-redux';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 
 function QuestionsListItem() {
     const currentQuizQuestions = useSelector((state) => state.quiz.currentQuizQuestions);

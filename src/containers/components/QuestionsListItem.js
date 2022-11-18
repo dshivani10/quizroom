@@ -1,6 +1,6 @@
 import { Radio, Space, Checkbox, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import {
     updateRadioBool,
     updateCheck,
