@@ -6,7 +6,6 @@ import AddQuestionPage from './containers/views/AddQuestionPage';
 import Header from './containers/components/Header';
 import Footer from './containers/components/Footer';
 import HomePage from './containers/views/HomePage';
-import LoginPage from './containers/views/LoginPage';
 
 function App() {
   return (
@@ -16,7 +15,6 @@ function App() {
         <div className="app-spacing" />
         <div className="app-content">
           <Routes>
-            <Route path="/login" exact element={<LoginPage />} />
             <Route path="/quiz/:quizId" exact element={<QuizPage />} />
             <Route path="/quiz/:quizId/add-question" exact element={<AddQuestionPage />} />
             <Route path="/" exact element={<HomePage />} />
