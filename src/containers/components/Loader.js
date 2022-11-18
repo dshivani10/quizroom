@@ -1,5 +1,5 @@
 import { Spin } from 'antd';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import { LoadingOutlined } from '@ant-design/icons';
 
 function Loader(){
