@@ -1,3 +1,4 @@
+// eslint-disable-file no-undef
 import React, { useEffect } from 'react';
 import jwt_decode from 'jwt-decode';
 import '../../css/Login.css';
