@@ -1,4 +1,3 @@
-// eslint-disable-file no-undef
 import React, { useEffect } from 'react';
 import jwt_decode from 'jwt-decode';
 import '../../css/Login.css';
@@ -11,11 +10,11 @@ function LoginPage() {
     }
     useEffect(() => {
         /* google global */
-        google.accounts.id.initialize({
+        google.accounts.id.initialize({ // eslint-disable
             client_id: "612323613881-u5oq416hbs8eig61gvu1j8ismlitmtfs.apps.googleusercontent.com",
             callback: userLogged
         });
-        google.accounts.id.renderButton(
+        google.accounts.id.renderButton( // eslint-disable
             document.getElementById("loginDiv"),
             { theme: "outline", size: "large"}
         );
