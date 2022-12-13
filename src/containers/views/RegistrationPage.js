@@ -1,3 +1,4 @@
+/* google global */
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
@@ -17,7 +18,6 @@ function RegistrationPage() {
         });
     }
     useEffect(() => {
-        /* google global */
         google.accounts.id.initialize({ // eslint-disable
             client_id: "612323613881-u5oq416hbs8eig61gvu1j8ismlitmtfs.apps.googleusercontent.com",
             callback: userLogged
