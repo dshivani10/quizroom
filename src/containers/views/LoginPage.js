@@ -29,11 +29,11 @@ function LoginPage() {
         getUser(sub);
     }
     useEffect(() => {
-        google.accounts.id.initialize({ // eslint-disable
+        google.accounts.id.initialize({
             client_id: "612323613881-u5oq416hbs8eig61gvu1j8ismlitmtfs.apps.googleusercontent.com",
             callback: userLogged
         });
-        google.accounts.id.renderButton( // eslint-disable
+        google.accounts.id.renderButton(
             document.getElementById("loginDiv"),
             { theme: "outline", size: "large", text: "signin_with"}
         );

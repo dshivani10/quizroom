@@ -1,4 +1,4 @@
-/* google global */
+/*global google*/
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
@@ -18,11 +18,11 @@ function RegistrationPage() {
         });
     }
     useEffect(() => {
-        google.accounts.id.initialize({ // eslint-disable
+        google.accounts.id.initialize({
             client_id: "612323613881-u5oq416hbs8eig61gvu1j8ismlitmtfs.apps.googleusercontent.com",
             callback: userLogged
         });
-        google.accounts.id.renderButton( // eslint-disable
+        google.accounts.id.renderButton(
             document.getElementById("registrationDiv"),
             { theme: "outline", size: "large", text: "signup_with"}
         );
