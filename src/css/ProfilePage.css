@@ -1,0 +1,21 @@
+.profile-page-container{
+    display: flex;
+    margin: 100px 500px;
+    justify-content: space-between;
+    border-bottom: 2px solid #d0d0d0;
+}
+.profile-name{
+    font-size: 20px;
+    font-weight: 700;
+    margin: 20px 0px;
+}
+.profile-image{
+    border-radius: 50%;
+}
+.sign-out-div{
+    display: flex;
+    align-items: flex-end;
+}
+.sign-out-button{
+    margin: 20px;
+}

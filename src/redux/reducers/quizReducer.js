@@ -12,7 +12,7 @@ const quizInitialState = {
   currentQuestion:{},
   currentQuestionIndex:0,
 };
-const questionInitialState = {};
+
 export const quizReducer = (state = quizInitialState, { type, payload }) => {
   switch (type) {
     case ActionTypes.ADD_ALL_QUIZZES:
@@ -97,13 +97,6 @@ export const quizReducer = (state = quizInitialState, { type, payload }) => {
         currentQuestionIndex:0,
       }
     }
-    default:
-      return state;
-  }
-};
-
-export const questionReducer = (state = questionInitialState, { type, payload }) => {
-  switch (type) {
     default:
       return state;
   }

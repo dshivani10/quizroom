@@ -38,4 +38,9 @@ export const updateBlank = (value) => ({
 export const resetState = (value) => ({
   type: ActionTypes.RESET_STATE,
   payload: value,
-})
+});
+
+export const setUser = (value) => ({
+  type: ActionTypes.SET_USER,
+  payload: value,
+});

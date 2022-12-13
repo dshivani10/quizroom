@@ -13,6 +13,7 @@ import '../../css/QuestionsList.css';
 import Loader from './Loader';
 import QuestionsListItem from './QuestionsListItem';
 import ScoreComponent from './ScoreComponent';
+import AppConstants from '../../configs/constants';
 
 function QuestionsList() {
   const { quizId } = useParams();
@@ -26,7 +27,7 @@ function QuestionsList() {
   const numberOfQuestions = useSelector((state) => state.quiz.numberOfQuestions);
   const currentQuizQuestions = useSelector((state) => state.quiz.currentQuizQuestions);
   async function fetchData(qid) {
-    const response = await axios.get(`https://nisum-quizroom.herokuapp.com/api/quizzes/${qid}`);
+    const response = await axios.get(`${AppConstants.API_ENDPOINT}/api/quizzes/${qid}`);
     const quiz = response.data;
     dispatch(setCurrentQuiz(quiz));
   }
@@ -62,8 +63,9 @@ function QuestionsList() {
   }, []);
 
   return (
-    numberOfQuestions > 0 ? (
+    currentQuiz.topic.length > 0 ? (
       !showResult ? (
+        numberOfQuestions > 0 ? (
         <div className="questions-list">
           <div className="quiz-page-title">
             <p>{currentQuiz.subtopic}</p>
@@ -86,6 +88,9 @@ function QuestionsList() {
             </Modal>
           </div>
           <QuestionsListItem />
+        </div>
+        ) : <div>
+          <p>No questions in this Quiz</p>
         </div>
       ) : (
         (showResult && !showScore) ? 
