@@ -7,5 +7,6 @@ const ActionTypes = {
   UPDATE_CHECK: 'UPDATE_CHECK',
   UPDATE_BLANK: 'UPDATE_BLANK',
   RESET_STATE: 'RESET_STATE',
+  SET_USER: 'SET_USER',
 };
 export default ActionTypes;

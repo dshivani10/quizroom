@@ -7,17 +7,26 @@ import {
 } from '../../redux/actions/quizActions';
 import '../../css/Home.css';
 import Loader from '../components/Loader';
+import AppConstants from '../../configs/constants';
 
 function HomePage() {
   const allQuizzesData = useSelector((state) => state.quiz.allQuizzesData);
+  const user_role = useSelector((state) => state.user.role);
   const [ selectedTopic,  setSelectedTopic] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const dataFetchedRef = useRef(false);
   async function fetchData() {
-    const response = await axios.get('https://nisum-quizroom.herokuapp.com/api/all-quizzes');
+    const response = await axios.get(`${AppConstants.API_ENDPOINT}/api/all-quizzes`);
     const quiz = response.data;
     dispatch(addAllQuizzes(quiz));
+  }
+  function navigateByRole(id){
+    if(user_role === 'reviewer'){
+      navigate(`/quiz/${id}/add-question`)
+    }else{
+      navigate(`/quiz/${id}`)
+    }
   }
   useEffect(() => {
     if (dataFetchedRef.current) return;
@@ -33,8 +42,8 @@ function HomePage() {
           role="button" tabIndex="0" 
           onMouseEnter={() => setSelectedTopic(quizItem.subtopic)} 
           onMouseLeave={() => setSelectedTopic('')} 
-          onClick={() => navigate(`/quiz/${quizItem._id}`)} 
-          onKeyDown={() => navigate(`/quiz/${quizItem._id}`)} 
+          onClick={() => navigateByRole(quizItem._id)} 
+          onKeyDown={() => navigateByRole(quizItem._id)} 
           key={quizItem._id}
         >
           {

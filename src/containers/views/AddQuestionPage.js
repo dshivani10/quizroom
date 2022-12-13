@@ -6,6 +6,7 @@ import '../../css/AddQuestion.css';
 import {
   changeType,
 } from '../../redux/actions/quizActions';
+import AppConstants from '../../configs/constants';
 
 function AddQuestionPage() {
   const questionType = useSelector((state) => state.addQuestion.questionType);
@@ -119,13 +120,13 @@ function AddQuestionPage() {
   }
   async function submitQuestion(type) {
     if (type === 'radio') {
-      await axios.post(`https://nisum-quizroom.herokuapp.com/api/quizzes/${quizId}/question`, questionRadio);
+      await axios.post(`${AppConstants.API_ENDPOINT}/api/quizzes/${quizId}/question`, questionRadio);
     } else if (type === 'check') {
-      await axios.post(`https://nisum-quizroom.herokuapp.com/api/quizzes/${quizId}/question`, questionCheck);
+      await axios.post(`${AppConstants.API_ENDPOINT}/api/quizzes/${quizId}/question`, questionCheck);
     } else if (type === 'bool') {
-      await axios.post(`https://nisum-quizroom.herokuapp.com/api/quizzes/${quizId}/question`, questionBool);
+      await axios.post(`${AppConstants.API_ENDPOINT}/api/quizzes/${quizId}/question`, questionBool);
     } else if (type === 'blank') {
-      await axios.post(`https://nisum-quizroom.herokuapp.com/api/quizzes/${quizId}/question`, questionBlank);
+      await axios.post(`${AppConstants.API_ENDPOINT}/api/quizzes/${quizId}/question`, questionBlank);
     }
     alert('Question added successfully !');
   }
