@@ -111,9 +111,9 @@ function AddQuestionPage() {
   }
   function optionSelected(event, type) {
     if (type === 'radio' || type === 'bool') {
-      questionRadio.correctOptionId = event.target.value;
+      questionRadio.correctOptionId = Number(event.target.value);
     } else if (type === 'check') {
-      questionCheck.correctOptionIds.push(event.target.value);
+      questionCheck.correctOptionIds.push(Number(event.target.value));
     } else if (type === 'blank') {
       questionBlank.correctAnswer = event.target.value;
     }
