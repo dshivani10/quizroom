@@ -104,9 +104,9 @@ function AddQuestionPage() {
   }
   function optionText(val, id, type) {
     if (type === 'radio') {
-      questionRadio.options[(id - 1)].option = val;
+      questionRadio.options[(id - 1)].label = val;
     } else if (type === 'check'){
-      questionCheck.options[(id - 1)].option = val;
+      questionCheck.options[(id - 1)].label = val;
     }
   }
   function optionSelected(event, type) {
